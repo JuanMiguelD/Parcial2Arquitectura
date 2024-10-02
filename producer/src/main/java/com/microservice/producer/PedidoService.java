@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
+
 @Service
 public class PedidoService {
 
@@ -16,13 +17,24 @@ public class PedidoService {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @CircuitBreaker(name = "rabbitmqCB", fallbackMethod = "fallbackEnvioPedido")
-    public ResponseEntity<String> enviarPedido(Pedido pedido) {
+    @CircuitBreaker(name = "pedidosCircuitBreaker",fallbackMethod = "fallbackEnvioPedido")
+     public ResponseEntity<String> enviarPedido(Pedido pedido) {
+        
+        
+        throw new RuntimeException("Simulación de fallo en el envío de pedido");
+            
+        /*
+        System.out.println("\n \n \n \n \n Circuit breaker activado. Deja pasar ejecutado.");
         rabbitTemplate.convertAndSend("colaPedidos88", pedido);
         return ResponseEntity.ok("Pedido enviado exitosamente");
+        */
     }
 
     public ResponseEntity<String> fallbackEnvioPedido(Pedido pedido, Throwable t) {
+        System.out.println("\n \n \n \n \n Circuit breaker activado. Fallback ejecutado.");
+
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Error en el envío de pedido.");
     }
+
+
 }

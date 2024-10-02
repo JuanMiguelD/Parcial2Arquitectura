@@ -29,16 +29,13 @@
 
 
 
-  <dependencies>
-  
-  </dependencies>
 
   <build>
   <pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>loombok</artifactId>
+        <artifactId>lombok</artifactId>
         <version>1.18.22</version>
       </plugin>
     </plugins>

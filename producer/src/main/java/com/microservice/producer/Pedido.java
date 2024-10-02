@@ -1,19 +1,37 @@
-package com.microservice.producer;
+package com.microservice.producer; 
+import java.io.Serializable;
 
-public class Pedido {
-    private String id;
-    private String descripcion;
 
-    public  Pedido(String id, String descripcion) {
-        this.id = id;
-        this.descripcion = descripcion;
+
+
+public class Pedido implements Serializable  {
+    private static final long serialVersionUID = 1L;
+
     
+    private String id;
+
+    
+    private String producto;
+
+    public Pedido(String id, String descripcion) {
+        this.id = id;
+        this.producto = descripcion;
     }
+
+    // Getters y setters
     public String getId() {
         return id;
     }
-    public String getDescripcion() {
-        return descripcion;
+
+    public void setId(String id) {
+        this.id = id;
     }
 
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String descripcion) {
+        this.producto = descripcion;
+    }
 }
