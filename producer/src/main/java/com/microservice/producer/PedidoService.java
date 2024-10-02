@@ -20,14 +20,14 @@ public class PedidoService {
     @CircuitBreaker(name = "pedidosCircuitBreaker",fallbackMethod = "fallbackEnvioPedido")
      public ResponseEntity<String> enviarPedido(Pedido pedido) {
         
-        
-        throw new RuntimeException("Simulación de fallo en el envío de pedido");
-            
         /*
+        throw new RuntimeException("Simulación de fallo en el envío de pedido");
+         */   
+        
         System.out.println("\n \n \n \n \n Circuit breaker activado. Deja pasar ejecutado.");
         rabbitTemplate.convertAndSend("colaPedidos88", pedido);
         return ResponseEntity.ok("Pedido enviado exitosamente");
-        */
+        
     }
 
     public ResponseEntity<String> fallbackEnvioPedido(Pedido pedido, Throwable t) {
